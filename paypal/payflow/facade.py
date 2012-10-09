@@ -68,7 +68,8 @@ def _submit_payment_details(gateway_fn, order_number, amt, bankcard, billing_add
             'street': billing_address['line1'],
             'city': billing_address['line4'],
             'state': billing_address['state'],
-            'zip': billing_address['postcode'].strip(' ')
+            'zip': billing_address['postcode'].strip(' '),
+            'country': billing_address['country'].iso_3166_1_a2
         })
 
     txn = gateway_fn(
