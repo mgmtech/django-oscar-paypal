@@ -61,6 +61,7 @@ def _submit_payment_details(trxtype, order_number, card_number, cvv, expiry_date
         'CITY': kwargs.get('city', ''),
         'STATE': kwargs.get('state', ''),
         'ZIP': kwargs.get('zip', ''),
+        'COUNTRY': kwargs.get('country', ''),
     }
     return _transaction(params)
 
