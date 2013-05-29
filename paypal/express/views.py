@@ -258,6 +258,12 @@ class SuccessResponseView(PaymentDetailsView):
         Return a created shipping address instance, created using
         the data returned by PayPal.
         """
+
+        # if shipping is disabled, don't create an address
+        no_shipping = getattr(settings, 'PAYPAL_NO_SHIPPING', False)
+        if no_shipping:
+            return None
+
         # Determine names - PayPal uses a single field
         ship_to_name = self.txn.value('PAYMENTREQUEST_0_SHIPTONAME')
         first_name = last_name = None

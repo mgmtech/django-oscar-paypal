@@ -311,6 +311,11 @@ def set_txn(basket, shipping_methods, currency, return_url, cancel_url, update_u
     params['PAYMENTREQUEST_0_AMT'] = _format_currency(
         params['PAYMENTREQUEST_0_AMT'])
 
+    # disable all shipping for PayPal Express
+    no_shipping = getattr(settings, 'PAYPAL_NO_SHIPPING', False)
+    if no_shipping:
+        params['NOSHIPPING'] = 1
+
     txn = _fetch_response(SET_EXPRESS_CHECKOUT, params)
 
     # Construct return URL
